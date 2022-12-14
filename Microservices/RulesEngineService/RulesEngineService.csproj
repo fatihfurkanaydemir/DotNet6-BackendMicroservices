@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.11" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	<PackageReference Include="RabbitMQ" Version="3.6.2" />
+	<PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
+	<PackageReference Include="RulesEngine" Version="4.0.0" />
+	<PackageReference Include="MongoDB.Driver" Version="2.17.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+</Project>

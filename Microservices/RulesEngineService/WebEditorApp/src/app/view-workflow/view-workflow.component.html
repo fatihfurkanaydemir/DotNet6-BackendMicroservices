@@ -1,0 +1,171 @@
+<p class="h1 m-3 text-center">{{ workflow.workflowName }}</p>
+<div class="w-75 d-flex flex-column mx-auto">
+  <div class="card my-1">
+    <div class="card-body row">
+      <div class="col-10">
+        <div class="row">
+          <div class="col-3">Name</div>
+          <div class="col-3">Success Event</div>
+          <div class="col-3">Error Message</div>
+          <div class="col-3">Expression</div>
+        </div>
+        <form class="row" #addRuleForm="ngForm">
+          <div class="col-3">
+            <input
+              type="text"
+              id="rule-name"
+              class="form-control"
+              [(ngModel)]="newRule.ruleName"
+              placeholder="Rule Name"
+              name="rule-name"
+              required
+              #ruleName="ngModel"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              type="text"
+              id="rule-success-event"
+              class="form-control"
+              [(ngModel)]="newRule.successEvent"
+              placeholder="Success Event"
+              name="rule-success-event"
+              required
+              #ruleSuccessEvent="ngModel"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              type="text"
+              id="rule-error-message"
+              class="form-control"
+              [(ngModel)]="newRule.errorMessage"
+              placeholder="Error Message"
+              name="rule-error-message"
+              required
+              #ruleErrorMessage="ngModel"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              type="text"
+              id="rule-expression"
+              class="form-control"
+              [(ngModel)]="newRule.expression"
+              placeholder="Expression"
+              name="rule-expression"
+              required
+              #ruleExpression="ngModel"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-2">
+        <div class="btn-group btn-group-sm w-100 h-100" role="group">
+          <button
+            type="button"
+            class="btn btn-success"
+            (click)="onAdd(addRuleForm)"
+            [disabled]="addRuleForm.invalid"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+
+<div class="w-75 d-flex flex-column mx-auto">
+  <div class="card my-1" *ngFor="let rule of tempRules; let idx = index">
+    <div class="card-body row">
+      <div class="col-10">
+        <div class="row">
+          <div class="col-3">Name</div>
+          <div class="col-3">Success Event</div>
+          <div class="col-3">Error Message</div>
+          <div class="col-3">Expression</div>
+        </div>
+        <form class="row" #editRuleForm="ngForm" id="idx">
+          <div class="col-3">
+            <input
+              type="text"
+              id="rule-name"
+              class="form-control"
+              [value]="rule.ruleName"
+              placeholder="Rule Name"
+              name="rule-name"
+              required
+              [disabled]="true"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              type="text"
+              id="rule-success-event"
+              class="form-control"
+              [(ngModel)]="rule.successEvent"
+              placeholder="Success Event"
+              name="rule-success-event"
+              required
+              #ruleSuccessEvent="ngModel"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              type="text"
+              id="rule-error-message"
+              class="form-control"
+              [(ngModel)]="rule.errorMessage"
+              placeholder="Error Message"
+              name="rule-error-message"
+              required
+              #ruleErrorMessage="ngModel"
+            />
+          </div>
+          <div class="col-3">
+            <input
+              type="text"
+              id="rule-expression"
+              class="form-control"
+              [(ngModel)]="rule.expression"
+              placeholder="Expression"
+              name="rule-expression"
+              required
+              #ruleExpression="ngModel"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="col-2">
+        <div class="btn-group btn-group-sm w-100 h-100" role="group">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="onSave(rule, editRuleForm)"
+            [disabled]="editRuleForm.invalid"
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="onRemove(rule)"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex mt-4 justify-content-center">
+    <ngb-pagination
+      *ngIf="dataCount !== 0"
+      [collectionSize]="dataCount"
+      [(page)]="pageNumber"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)"
+    ></ngb-pagination>
+  </div>
+</div>

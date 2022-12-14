@@ -1,0 +1,60 @@
+<div id="add-workflow" class="w-75 mx-auto">
+  <form>
+    <div class="form-group row m-5">
+      <div class="col btn-group">
+        <button class="btn btn-success py-3" (click)="open(modal)">
+          Add New Workflow
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <ng-template #modal let-modal>
+    <form
+      #addWorkflowForm="ngForm"
+      (ngSubmit)="onSubmit(addWorkflowForm, modal)"
+    >
+      <div class="modal-header">
+        <h1 class="modal-title" id="modal-basic-title">Add Workflow</h1>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="workflow-name">Workflow Name</label>
+          <input
+            type="text"
+            id="workflow-name"
+            class="form-control"
+            [(ngModel)]="workflow.workflowName"
+            #workflowName="ngModel"
+            name="workflowname"
+            required
+          />
+        </div>
+
+        <p
+          *ngIf="
+            workflowName.invalid && (workflowName.dirty || workflowName.touched)
+          "
+          class="text-danger error-message"
+        >
+          Please fill the field.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="submit"
+          class="btn btn-primary w-100"
+          [disabled]="addWorkflowForm.invalid"
+        >
+          Add
+        </button>
+      </div>
+    </form>
+  </ng-template>
+</div>

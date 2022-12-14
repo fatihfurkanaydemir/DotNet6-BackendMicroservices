@@ -20,7 +20,8 @@ public class UserController : BaseApiController
   [HttpPost]
   public async Task<IActionResult> Create(CreateUserCommand command)
   {
-    var succeededRules = await ExecuteRulesAllAsync("User", command);
+    Console.WriteLine(command.GetType().Name);
+    var succeededRules = await ExecuteRulesAllAsync(command.GetType().Name, command);
 
     return Ok(await Mediator.Send(command));
   }

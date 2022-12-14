@@ -5,7 +5,6 @@ using Common.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using RulesEngine.Extensions;
 using RulesEngine.Interfaces;
 using RulesEngine.Models;
 
@@ -21,7 +20,7 @@ public abstract class BaseApiController : ControllerBase
   protected IRulesEngine RulesEngine => _rulesEngine ??= HttpContext.RequestServices.GetService<IRulesEngine>()!;
   protected async Task<List<string>> ExecuteRulesAnyAsync(string workflowName, params object[] inputs)
   {
-    List<RuleResultTree> resultList = await RulesEngine.ExecuteAllRulesAsync("User", inputs);
+    List<RuleResultTree> resultList = await RulesEngine.ExecuteAllRulesAsync(workflowName, inputs);
     List<string> errors = new();
     List<string> succeededRules = new();
 
@@ -45,7 +44,7 @@ public abstract class BaseApiController : ControllerBase
 
   protected async Task<List<string>> ExecuteRulesAllAsync(string workflowName, params object[] inputs)
   {
-    List<RuleResultTree> resultList = await RulesEngine.ExecuteAllRulesAsync("User", inputs);
+    List<RuleResultTree> resultList = await RulesEngine.ExecuteAllRulesAsync(workflowName, inputs);
     List<string> errors = new();
     List<string> succeededRules = new();
 
